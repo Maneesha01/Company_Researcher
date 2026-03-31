@@ -19,17 +19,17 @@ class Researcher():
     tasks_config="config/tasks.yaml"
 
     @agent
-    def Researcher(self) -> Agent:
+    def Researcher_Agent(self) -> Agent:
         return Agent(
-            config=self.agents_config['Researcher'], 
+            config=self.agents_config['Researcher_Agent'], 
             verbose=True,
             tools=[SerperDevTool()]
         )
 
     @agent
-    def Analyst(self) -> Agent:
+    def Analyst_Agent(self) -> Agent:
         return Agent(
-            config=self.agents_config['Analyst'], 
+            config=self.agents_config['Analyst_Agent'], 
             verbose=True
         )
 

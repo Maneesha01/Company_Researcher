@@ -1,23 +1,21 @@
 research_task:
   description: >
-    Research about the {company} online and collect all the important and relevant information about company in concise manner.
+    Research about the {company} online and collect the important and relevant information about company in concise manner. 
   expected_output: >
-    Report containing detailed analysis about {company}
-  agent: >
-    Researcher
+    Report containing detailed analysis about {company} 
+  agent: Researcher_Agent
   
 
-  analysis_task:
-    description: > 
-      Analyze the research findings and create a comprehensive report on {company}.
-    expected_output: >
-      Report summarizing findings of research task about {company}
-    agent : >
-      Analyst
-    context: >
-      research_task
-    output_file: >
-      output/final_report.md
+analysis_task:
+  description: > 
+    Analyze the research findings and create a comprehensive report on {company}.
+  expected_output: >
+    Report summarizing findings of research task about {company}
+  agent : Analyst_Agent
+  context: 
+    - research_task
+  output_file: >
+    output/final_report.md
 
 
   
