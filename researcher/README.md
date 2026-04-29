@@ -1,54 +1,157 @@
-# Researcher Crew
+# 📊 Company Researcher  
+Multi-Agent AI System using CrewAI for Automated Company Intelligence  
 
-Welcome to the Researcher Crew project, powered by [crewAI](https://crewai.com). This template is designed to help you set up a multi-agent AI system with ease, leveraging the powerful and flexible framework provided by crewAI. Our goal is to enable your agents to collaborate effectively on complex tasks, maximizing their collective intelligence and capabilities.
+---
 
-## Installation
+## 🚀 Overview  
 
-Ensure you have Python >=3.10 <3.14 installed on your system. This project uses [UV](https://docs.astral.sh/uv/) for dependency management and package handling, offering a seamless setup and execution experience.
+Company Researcher is a multi-agent AI system built using CrewAI that automates company research and generates structured reports using LLMs.
 
-First, if you haven't already, install uv:
+The system uses role-based agents to:
+- Collect real-time company data from the web  
+- Analyze and summarize insights  
+- Generate structured outputs using a defined schema  
 
-```bash
-pip install uv
-```
+---
 
-Next, navigate to your project directory and install the dependencies:
+## 🧠 Architecture  
 
-(Optional) Lock the dependencies and install them by using the CLI command:
-```bash
-crewai install
-```
-### Customizing
+User Input (Company Name)  
+        ↓  
+Researcher Agent (Web Search)  
+        ↓  
+Analyst Agent (Analysis & Report Generation)  
+        ↓  
+Structured Output (Pydantic Model)  
+        ↓  
+Markdown Report (output/final_report.md)  
 
-**Add your `OPENAI_API_KEY` into the `.env` file**
+---
 
-- Modify `src/researcher/config/agents.yaml` to define your agents
-- Modify `src/researcher/config/tasks.yaml` to define your tasks
-- Modify `src/researcher/crew.py` to add your own logic, tools and specific args
-- Modify `src/researcher/main.py` to add custom inputs for your agents and tasks
+## 🤖 Agents  
 
-## Running the Project
+### Researcher Agent  
+- Role: Senior Researcher  
+- Goal: Collect relevant and important company information  
+- Tools: SerperDevTool (web search)  
+- LLM: llama3.1 (Ollama)  
 
-To kickstart your crew of AI agents and begin task execution, run this from the root folder of your project:
+### Analyst Agent  
+- Role: Reporting Analyst  
+- Goal: Analyze research and generate concise reports  
+- LLM: llama3.1 (Ollama)  
 
-```bash
-$ crewai run
-```
+---
 
-This command initializes the researcher Crew, assembling the agents and assigning them tasks as defined in your configuration.
+## 📋 Tasks  
 
-This example, unmodified, will run the create a `report.md` file with the output of a research on LLMs in the root folder.
+### Research Task  
+- Research company data online  
+- Collect relevant and important information  
 
-## Understanding Your Crew
+### Analysis Task  
+- Analyze research findings  
+- Generate structured report  
+- Save output to file  
 
-The researcher Crew is composed of multiple AI agents, each with unique roles, goals, and tools. These agents collaborate on a series of tasks, defined in `config/tasks.yaml`, leveraging their collective skills to achieve complex objectives. The `config/agents.yaml` file outlines the capabilities and configurations of each agent in your crew.
+Output file:  output/final_report.md
 
-## Support
+---
 
-For support, questions, or feedback regarding the Researcher Crew or crewAI.
-- Visit our [documentation](https://docs.crewai.com)
-- Reach out to us through our [GitHub repository](https://github.com/joaomdmoura/crewai)
-- [Join our Discord](https://discord.com/invite/X4JWnZnxPb)
-- [Chat with our docs](https://chatg.pt/DWjSBZn)
+## 🧾 Structured Output  
 
-Let's create wonders together with the power and simplicity of crewAI.
+The final report follows this schema:
+
+
+class CompanyReport(BaseModel):
+Name: str
+Summary: str
+Technical_Focus: str
+Future_Aspirations: str
+
+---
+
+## ⚙️ Tech Stack  
+
+- Python  
+- CrewAI  
+- Ollama (llama3.1)  
+- SerperDevTool  
+- Pydantic  
+
+---
+
+## 📂 Project Structure  
+
+
+Company_Researcher/
+│
+├── config/
+│ ├── agents.yaml
+│ ├── tasks.yaml
+│
+├── researcher/
+│ └── crew.py
+│
+├── output/
+│ └── final_report.md
+│
+├── main.py
+├── requirements.txt
+└── README.md
+
+
+---
+
+## ▶️ Running the Project  
+
+### 1. Clone Repository  
+
+git clone https://github.com/Maneesha01/Company_Researcher.git
+
+cd Company_Researcher
+
+
+### 2. Setup Environment  
+
+python -m venv venv
+source venv/bin/activate # Windows: venv\Scripts\activate
+pip install -r requirements.txt
+
+
+### 3. Add API Key  
+
+Create `.env` file:  
+
+SERPER_API_KEY=your_api_key
+
+
+Make sure Ollama is running:  
+
+ollama run llama3.1
+
+
+### 4. Run  
+
+python main.py
+
+
+---
+
+## 🔄 Workflow  
+
+1. Input company name (default: Apple)  
+2. Researcher Agent collects data  
+3. Analyst Agent processes data  
+4. Structured report is generated  
+5. Output is saved and printed  
+
+---
+
+## 📊 Example Output  
+
+
+Name: Apple
+Summary: Global leader in consumer electronics
+Technical_Focus: AI, hardware-software integration
+Future_Aspirations: Expansion in AI and AR/VR
