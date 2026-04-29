@@ -63,11 +63,11 @@ Output file:  output/final_report.md
 The final report follows this schema:
 
 
-class CompanyReport(BaseModel):
-Name: str
-Summary: str
-Technical_Focus: str
-Future_Aspirations: str
+class CompanyReport(BaseModel):  
+Name: str  
+Summary: str  
+Technical_Focus: str  
+Future_Aspirations: str  
 
 ---
 
@@ -83,22 +83,23 @@ Future_Aspirations: str
 
 ## 📂 Project Structure  
 
-
+```
 Company_Researcher/
 │
 ├── config/
-│ ├── agents.yaml
-│ ├── tasks.yaml
+│   ├── agents.yaml
+│   ├── tasks.yaml
 │
 ├── researcher/
-│ └── crew.py
+│   └── crew.py
 │
 ├── output/
-│ └── final_report.md
+│   └── final_report.md
 │
 ├── main.py
 ├── requirements.txt
 └── README.md
+```
 
 
 ---
@@ -151,7 +152,7 @@ python main.py
 ## 📊 Example Output  
 
 
-Name: Apple
-Summary: Global leader in consumer electronics
-Technical_Focus: AI, hardware-software integration
-Future_Aspirations: Expansion in AI and AR/VR
+Name: Apple  
+Summary: Global leader in consumer electronics  
+Technical_Focus: AI, hardware-software integration  
+Future_Aspirations: Expansion in AI and AR/VR  
