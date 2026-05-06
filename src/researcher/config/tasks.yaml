@@ -1,6 +1,6 @@
 research_task:
   description: >
-    Research about the {company} online and collect the important and relevant information about company in concise manner. 
+    Research about the {company} company online and collect the important and relevant information about company in concise manner along with the source links the information is collected on. 
   expected_output: >
     Report containing detailed analysis about {company} 
   agent: Researcher_Agent

@@ -6,10 +6,13 @@ from typing import List
 
 class CompanyReport(BaseModel):
     '''Detailed Research on company'''
-    Name: str = Field("Name of Company")
-    Summary: str =Field("Summary of company in 1 line")
-    Technical_Focus : str = Field("Technologies company is mainly focussed   on")
-    Future_Aspirations: str = Field("Future aspirations of the company")
+    name: str = Field ("Official name of the company")
+    summary: str = Field ("Brief 1 or 2 lines overview describing what the company does")
+    technical_focus: List[str] = Field("Core technologies, domains, or technical areas focus of company")
+    key_products: List[str] = Field("Major products or services offered by the company")
+    competitors: List[str] = Field("Main competing companies in the same market or domain")
+    risks: List[str] = Field("Potential risks such regulations, or technical challenges")
+    sources: List[str] = Field("List of URLs or references used to gather the information")
 
 @CrewBase
 class Researcher():
