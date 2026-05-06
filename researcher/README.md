@@ -1,87 +1,105 @@
-# 📊 Company Researcher  
-Multi-Agent AI System using CrewAI for Automated Company Intelligence  
+# 📊 Company Researcher
+
+Multi-Agent AI System using CrewAI for Automated Company Intelligence
 
 ---
 
-## 🚀 Overview  
+## 🚀 Overview
 
-Company Researcher is a multi-agent AI system built using CrewAI that automates company research and generates structured reports using LLMs.
+Company Researcher is a multi-agent AI system built using CrewAI that automates company research and generates **structured, source-grounded reports** using LLMs.
 
 The system uses role-based agents to:
-- Collect real-time company data from the web  
-- Analyze and summarize insights  
-- Generate structured outputs using a defined schema  
+
+* Collect real-time company data from the web
+* Analyze and synthesize insights
+* Generate structured outputs with explicit fields and source references
 
 ---
 
-## 🧠 Architecture  
+## 🧠 Architecture
 
 User Input (Company Name)  
-        ↓  
-Researcher Agent (Web Search)  
-        ↓  
-Analyst Agent (Analysis & Report Generation)  
-        ↓  
-Structured Output (Pydantic Model)  
-        ↓  
+↓  
+Researcher Agent (Web Search + Source Collection)  
+↓  
+Analyst Agent (Analysis & Structured Report Generation)  
+↓  
+Pydantic Structured Output (Validated Schema)  
+↓  
 Markdown Report (output/final_report.md)  
 
 ---
 
-## 🤖 Agents  
+## 🤖 Agents
 
-### Researcher Agent  
-- Role: Senior Researcher  
-- Goal: Collect relevant and important company information  
-- Tools: SerperDevTool (web search)  
-- LLM: llama3.1 (Ollama)  
+### Researcher Agent
 
-### Analyst Agent  
-- Role: Reporting Analyst  
-- Goal: Analyze research and generate concise reports  
-- LLM: llama3.1 (Ollama)  
+* Role: Senior Researcher
+* Goal: Collect relevant company data along with **source links**
+* Tools: SerperDevTool (web search)
+* LLM: llama3.1 (Ollama)
 
----
+### Analyst Agent
 
-## 📋 Tasks  
-
-### Research Task  
-- Research company data online  
-- Collect relevant and important information  
-
-### Analysis Task  
-- Analyze research findings  
-- Generate structured report  
-- Save output to file  
-
-Output file:  output/final_report.md
+* Role: Reporting Analyst
+* Goal: Analyze research and generate **structured, concise reports**
+* LLM: llama3.1 (Ollama)
 
 ---
 
-## 🧾 Structured Output  
+## 📋 Tasks
 
-The final report follows this schema:
+### Research Task
 
+* Performs web search for company information
+* Collects **relevant insights + source URLs**
 
-class CompanyReport(BaseModel):  
-Name: str  
-Summary: str  
-Technical_Focus: str  
-Future_Aspirations: str  
+### Analysis Task
 
----
+* Processes research data
+* Generates structured report using schema
+* Saves output to file
 
-## ⚙️ Tech Stack  
-
-- Python  
-- CrewAI  
-- Ollama (llama3.1)  
-- SerperDevTool  
-- Pydantic  
+Output file: `output/final_report.md`
 
 ---
 
-## 📂 Project Structure  
+## 🧾 Structured Output Schema
+
+The final report follows a strongly-typed schema:
+
+```python
+class CompanyReport(BaseModel):
+    """Detailed Research on company"""
+
+    name: str = Field ("Official name of the company")
+    summary: str = Field ("Brief 1 or 2 lines overview describing what the company does")
+    technical_focus: List[str] = Field("Core technologies, domains, or technical areas focus of company")
+    key_products: List[str] = Field("Major products or services offered by the company")
+    competitors: List[str] = Field("Main competing companies in the same market or domain")
+    risks: List[str] = Field("Potential risks such regulations, or technical challenges")
+    sources: List[str] = Field("List of URLs or references used to gather the information")
+```
+
+### 📌 Key Improvements
+
+* Structured multi-field output (not plain text)
+* Explicit **source grounding**
+* Better representation of real-world company insights (products, competitors, risks)
+
+---
+
+## ⚙️ Tech Stack
+
+* Python
+* CrewAI
+* Ollama (llama3.1)
+* SerperDevTool
+* Pydantic
+
+---
+
+## 📂 Project Structure
 
 ```
 Company_Researcher/
@@ -101,58 +119,74 @@ Company_Researcher/
 └── README.md
 ```
 
-
 ---
 
-## ▶️ Running the Project  
+## ▶️ Running the Project
 
-### 1. Clone Repository  
+### 1. Clone Repository
 
+```
 git clone https://github.com/Maneesha01/Company_Researcher.git
-
 cd Company_Researcher
+```
 
+### 2. Setup Environment
 
-### 2. Setup Environment  
-
+```
 python -m venv venv
-source venv/bin/activate # Windows: venv\Scripts\activate
+source venv/bin/activate   # Windows: venv\Scripts\activate
 pip install -r requirements.txt
+```
 
+### 3. Add API Key
 
-### 3. Add API Key  
+Create `.env` file:
 
-Create `.env` file:  
-
+```
 SERPER_API_KEY=your_api_key
+```
 
+Make sure Ollama is running:
 
-Make sure Ollama is running:  
-
+```
 ollama run llama3.1
+```
 
+### 4. Run
 
-### 4. Run  
-
+```
 python main.py
-
-
----
-
-## 🔄 Workflow  
-
-1. Input company name (default: Apple)  
-2. Researcher Agent collects data  
-3. Analyst Agent processes data  
-4. Structured report is generated  
-5. Output is saved and printed  
+```
 
 ---
 
-## 📊 Example Output  
+## 🔄 Workflow
 
+1. Input company name (default: Apple)
+2. Researcher Agent collects data + sources
+3. Analyst Agent structures insights
+4. Validated report is generated
+5. Output is saved and printed
 
+---
+
+## 📊 Example Output
+
+```
 Name: Apple  
-Summary: Global leader in consumer electronics  
-Technical_Focus: AI, hardware-software integration  
-Future_Aspirations: Expansion in AI and AR/VR  
+Summary: Global leader in consumer electronics and software ecosystem  
+Technical Focus: ["AI", "Consumer Electronics", "Chip Design"]  
+Key Products: ["iPhone", "MacBook", "iCloud"]  
+Competitors: ["Samsung", "Microsoft", "Google"]  
+Risks: ["Supply chain dependency", "Market saturation"]  
+Sources: ["https://...", "https://..."]
+```
+
+---
+
+## 🚧 Future Improvements
+
+* Evaluation metrics (accuracy, relevance)
+* UI for interactive usage
+
+---
